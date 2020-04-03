@@ -35,7 +35,7 @@
                   <ComboBox fx:id="menuCorsi" prefWidth="150.0" promptText="Corsi" />
                </children>
             </HBox>
-            <Button fx:id="btnIscrittiCorso" mnemonicParsing="false" text="Cerca iscritti corso">
+            <Button fx:id="btnIscrittiCorso" mnemonicParsing="false" onAction="#iscrittiCorso" text="Cerca iscritti corso">
                <VBox.margin>
                   <Insets left="10.0" top="20.0" />
                </VBox.margin>
@@ -52,7 +52,7 @@
                         <Insets right="10.0" top="20.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="btnCheck" mnemonicParsing="false" prefHeight="23.0" prefWidth="32.0" text="✔" textFill="WHITE">
+                  <Button fx:id="btnCheck" mnemonicParsing="false" onAction="#autocompletamento" prefHeight="23.0" prefWidth="32.0" text="✔" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="10.0" top="20.0" />
                      </HBox.margin>
@@ -81,8 +81,8 @@
             </HBox>
             <AnchorPane>
                <children>
-                  <Button fx:id="btnCercaCorsi" mnemonicParsing="false" text="Cerca corsi" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0" />
-                  <Button fx:id="btnIsctivi" mnemonicParsing="false" text="Iscrivi" AnchorPane.rightAnchor="30.0" />
+                  <Button fx:id="btnCercaCorsi" mnemonicParsing="false" onAction="#stampaCorsi" text="Cerca corsi" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="btnIsctivi" mnemonicParsing="false" onAction="#cercaIscrivi" text="Iscrivi" AnchorPane.rightAnchor="30.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="30.0" top="-30.0" />
@@ -100,7 +100,7 @@
       </VBox>
    </center>
    <bottom>
-      <Button fx:id="btnReset" mnemonicParsing="false" prefHeight="14.0" prefWidth="63.0" text="Reset" BorderPane.alignment="TOP_RIGHT">
+      <Button fx:id="btnReset" mnemonicParsing="false" onAction="#doReset" prefHeight="14.0" prefWidth="63.0" text="Reset" BorderPane.alignment="TOP_RIGHT">
          <BorderPane.margin>
             <Insets bottom="10.0" right="10.0" top="10.0" />
          </BorderPane.margin></Button>

@@ -12,7 +12,7 @@ import it.polito.tdp.lab04.model.Studente;
 public class StudenteDAO {
 
 	public List<Studente> getStudenti(int matricola){
-		final String sql= "SELECT * FROM studente";
+		final String sql= "select * from studente where matricola = ?";
 		
 		List<Studente> studenti = new LinkedList<Studente>();
 		
