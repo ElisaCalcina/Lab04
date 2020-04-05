@@ -56,6 +56,8 @@ public class FXMLController {
 
     @FXML
     void autocompletamento(ActionEvent event) {
+    	txtNome.clear();
+    	txtCognome.clear();
     	String matricolaString= txtMatricola.getText();
     	int matricola;
     		try {
@@ -76,21 +78,84 @@ public class FXMLController {
 
     @FXML
     void cercaIscrivi(ActionEvent event) {
-
+    	txtRisultato.clear();
+    	
+    	Corso corso= menuCorsi.getValue();
+    	int matricola = Integer.parseInt(txtMatricola.getText());
+		
+    	boolean cerca= model.cercaStudenteCorso(corso, matricola);
+    	
+    	if(cerca==true) {
+    		txtRisultato.appendText("Lo studente è iscritto al corso");
+    	}
+    	else {
+    		txtRisultato.appendText("Studente non iscritto al corso");
+    	}
     }
 
     @FXML
     void doReset(ActionEvent event) {
+    	txtNome.clear();
+    	txtCognome.clear();
+    	txtMatricola.clear();
+    	txtRisultato.clear();
 
     }
 
     @FXML
     void iscrittiCorso(ActionEvent event) {
+    	txtRisultato.clear();
+    	
+    	Corso corso= menuCorsi.getValue();
+    	
+    	if(corso==null) {
+    		txtRisultato.appendText("Nessun corso selezionato");
+    	}
+    	
+    	List<Studente> studenti= this.model.getStudentiIscrittiAlCorso(corso);
+    	StringBuilder sb= new StringBuilder();
+    	
+    	for(Studente s: studenti) {
+    		sb.append(String.format("%-10s", s.getMatricola()));
+    		sb.append(String.format("%-20s", s.getNome()));
+    		sb.append(String.format("%-20s", s.getCognome()));
+    		sb.append(String.format("%-10s", s.getCDS()));
+    		sb.append("\n");
+    	}
+    	txtRisultato.appendText(sb.toString());
 
     }
 
     @FXML
     void stampaCorsi(ActionEvent event) {
+    	txtRisultato.clear();
+    	
+    	String matricolaString= txtMatricola.getText();
+    	int matricola;
+			try {
+				matricola= Integer.parseInt(matricolaString);
+			}catch(NumberFormatException e) {
+				txtRisultato.setText("Devi inserire un numero");
+				return;
+			}
+		
+		List<Corso> corsi = this.model.getCorsiDelloStudente(matricola);
+		
+		if(corsi.size()==0) {
+			txtRisultato.appendText("Matricola non esistente");
+		}
+		
+		StringBuilder sb= new StringBuilder();
+		
+		for(Corso c: corsi) {
+			sb.append(String.format("%-8s", c.getCodins()));
+			sb.append(String.format("%-4s", c.getCrediti()));
+			sb.append(String.format("%-45s", c.getNome()));
+			sb.append(String.format("%-4s", c.getPd()));
+			sb.append("\n");
+		}
+    	
+    	txtRisultato.appendText(sb.toString());
 
     }
 
